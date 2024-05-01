@@ -1,0 +1,24 @@
+{
+  "name": "expressjs",
+  "version": "1.0.0",
+  "description": "try express API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stewart1208/Express_API.git"
+  },
+  "author": "bezzeghoud mohammed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stewart1208/Express_API/issues"
+  },
+  "homepage": "https://github.com/stewart1208/Express_API#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.3.3",
+    "nodemon": "^3.1.0"
+  }
+}
