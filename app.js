@@ -1,17 +1,23 @@
-const express = require('express')
-const app = express()
-const studentsRoute = require('./routes/studentsRouts')
-const teachersRoute = require('./routes/teachersRoutes')
-app.use(express.json())
+const express = require('express');
+const app = express();
+const router = require('./routes/router');
+const connectDB = require('./config/db');
+const { PORT } = require('./config/env');
 
-const port = 3000
+app.use(express.json());
+
+// Connect to the database
+connectDB().then(() => {
+  // Start the server after successfully connecting to the database
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
+  });
+}).catch((error) => {
+  console.error('Error connecting to the database:', error);
+});
+
 app.get('/', (req, res) => {
-  res.send('Welcome page')
-})
+  res.send('Welcome page');
+});
 
-app.use('/students',studentsRoute)
-app.use('/teachers',teachersRoute)
-
-app.listen(port, () => {
-  console.log(`Serveur runing in http://localhost:${port}/`)
-})
+app.use('/', router);

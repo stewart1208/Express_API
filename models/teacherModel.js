@@ -12,6 +12,11 @@ const teacherSchema = mongoose.Schema({
         type : Date ,
         require : true
     },
+    speciality : {
+        type : String ,
+        enum : ['arabe','francais','anglais','math','physic','espaniole'] , 
+        require : true
+    },
     phonenumber : {
         type : Number ,
         require : false ,
