@@ -9,6 +9,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Welcome page');
 });
+connectDB()
 app.use('/', router);
 
 app.listen(PORT, () => {
