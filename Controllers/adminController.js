@@ -29,7 +29,7 @@ const update = async (req,res)=>{
     try{
         const AdminUpdeted = await Admin.findByIdAndUpdate(req.params.id,req.body,{new : true})
         if(!AdminUpdeted){
-            return res.status(404).json({message : "student not fund ! "})
+            return res.status(404).json({message : "admin not fund ! "})
         }
         res.status(200).json(AdminUpdeted)
     }catch(err){res.status(400).json({message : err})}
