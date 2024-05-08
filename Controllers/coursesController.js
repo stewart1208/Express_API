@@ -32,17 +32,26 @@ const update = async (req,res)=>{
     }catch(err){
         res.status(500).json({message : err.message})
     }
-}
+}/*
 const destroy = async (req, res)=>{
     try {
-        const cours = await Cours.findByIdAndDelete(req.params.id);
+        const cours = await Cours.findByIdAndDelete(req.params.id)
         if (!cours) {
-            return res.status(404).json({ message: 'Cours not found' });
+            return res.status(404).json({ message: 'Cours not found' })
         }
-        res.json({ message: 'Cours deleted successfully' });
+        res.json({ message: 'Cours deleted successfully' })
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message })
     }
+}*/
+const destroy = async (req,res)=>{
+    try{
+        const coursdeleted = await Cours.findByIdAndDelete(req.params.id)
+        if(!coursdeleted){
+            return res.status(404).json({message : "cours not exist !"})
+        }
+        res.status(200).json({message : "rah lghali raaaaah ! "})
+    }catch(err){res.status(500).json({message : err})}
 }
 module.exports={
     index,show,store,update,destroy

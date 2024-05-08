@@ -1,4 +1,6 @@
 const Student = require('../models/studentModel')
+const bcrypt = require('bcrypt');
+
 
 const index = async (req,res)=>{
     try{
@@ -17,18 +19,14 @@ const show = async (req,res)=>{
         res.status(200).json(student)
     }catch(err){res.status(500).json({message : err})}
 }
-const create = (req,res)=>{
-    res.send('student create page !')
-}
 const store = async (req,res)=>{
     try{
-        const newStudent = new Student(req.body)
+        const { password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newStudent = new Student({ ...req.body, password: hashedPassword });
         const StudentSaved = await newStudent.save()
         res.status(201).json(StudentSaved)
-    }catch(err){res.status(400).json({message : err})}
-}
-const edit =(req,res)=>{
-    res.send('student edity page')
+    }catch(err){res.status(400).json({message : err.message})}
 }
 const update = async (req,res)=>{
     try{
@@ -48,6 +46,18 @@ const destroy = async (req,res)=>{
         res.status(200).json({message : "rah lghali raaaaah ! "})
     }catch(err){res.status(500).json({message : err})}
 }
+const getByLevel = async (req, res) => {
+    try {
+        const students = await Student.find({ level: req.params.level });
+        if (students.length === 0) {
+            return res.status(404).json({ message: "We don't have students in this level" });
+        }
+        res.status(200).json(students);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 module.exports = {
-    index,show,create,store,edit,update,destroy
+    index,show,store,update,destroy,getByLevel
 }

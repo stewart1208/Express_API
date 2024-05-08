@@ -1,4 +1,6 @@
 const Admin = require('../models/adminModel')
+const bcrypt = require('bcrypt')
+
 const index = async (req,res)=>{
     try{
         const admins = await Admin.find()
@@ -18,7 +20,9 @@ const show = async (req,res)=>{
 }
 const store = async (req,res)=>{
     try{
-        const newAdmin = new Admin(req.body)
+        const { password } = req.body
+        const hashedPasword = await bcrypt.hash(password,10)
+        const newAdmin = new Admin({ ...req.body, password: hashedPasword });
         const adminSaved = await newAdmin.save()
         res.status(201).json(adminSaved)
     }catch(err){

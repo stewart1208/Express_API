@@ -4,10 +4,10 @@ const studentSchema = mongoose.Schema({
         type : String,
         require : true
     },
-    lastname : {
+    lastname : [{
         type : String,
         require : true
-    },
+    }],
     birthday : { 
         type : Date ,
         require : true
