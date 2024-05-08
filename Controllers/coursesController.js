@@ -32,18 +32,7 @@ const update = async (req,res)=>{
     }catch(err){
         res.status(500).json({message : err.message})
     }
-}/*
-const destroy = async (req, res)=>{
-    try {
-        const cours = await Cours.findByIdAndDelete(req.params.id)
-        if (!cours) {
-            return res.status(404).json({ message: 'Cours not found' })
-        }
-        res.json({ message: 'Cours deleted successfully' })
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}*/
+}
 const destroy = async (req,res)=>{
     try{
         const coursdeleted = await Cours.findByIdAndDelete(req.params.id)
