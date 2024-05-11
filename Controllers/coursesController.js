@@ -1,8 +1,9 @@
 const Cours = require('../models/CoursModel')
+const Teacher = require('../models/teacherModel')
 
 const index = async (req,res)=>{
     try{
-        const courses = await Cours.find().populate('salle teacher students')
+        const courses = await Cours.find().populate('groups')
         res.status(200).json(courses)
     }catch(err){
         res.status(500).json({message : err.message})
@@ -10,7 +11,7 @@ const index = async (req,res)=>{
 }
 const show = async (req,res)=>{
     try{
-        const cours = await Cours.findById(req.params.id).populate('salle teacher students')
+        const cours = await Cours.findById(req.params.id).populate('groups')
         if(!cours)return res.status(404).json({message : "cours not fund ! "})
         res.status(200).json(cours)
     }catch(err){res.status(500).json({message : err.message})}
@@ -42,6 +43,15 @@ const destroy = async (req,res)=>{
         res.status(200).json({message : "rah lghali raaaaah ! "})
     }catch(err){res.status(500).json({message : err})}
 }
+const getTeacher = async (req,res)=>{
+    try{
+        const teacher = await Teacher.find({courses : req.params.id})
+        res.status(200).json(teacher)
+    }catch(err){
+        res.status(500).json({message : err.message})
+    }
+}
+
 module.exports={
-    index,show,store,update,destroy
+    index,show,store,update,destroy,getTeacher
 }

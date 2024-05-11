@@ -6,6 +6,8 @@ const adminRoute = require('./adminRoutes')
 const authRoute = require('./auth/index')
 const sallesRoute = require('./sallesRoutes')
 const coursesRoute = require('./coursesRoutes')
+const groupsRoute = require('./groupesRoutes')
+const presencesRoute = require('./presencesRoutes')
 
 router.use('/students',studentsRoute)
 router.use('/teachers',teachersRoute)
@@ -13,5 +15,7 @@ router.use('/admin',adminRoute)
 router.use('/auth',authRoute)
 router.use('/salles',sallesRoute)
 router.use('/courses',coursesRoute)
+router.use('/groups',groupsRoute)
+router.use('/presences',presencesRoute)
 
 module.exports = router

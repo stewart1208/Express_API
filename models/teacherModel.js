@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const Cours = require('./CoursModel')
+
 const teacherSchema = mongoose.Schema({
     name : {
         type : String,
@@ -38,7 +40,11 @@ const teacherSchema = mongoose.Schema({
     createdat : {
         type : Date,
         default : Date.now
-    }
+    },
+    courses : [{
+        type : mongoose.Schema.Types.ObjectId ,
+        ref : Cours
+    }]
 
 })
 const Teacher = mongoose.model('Teacher',teacherSchema)

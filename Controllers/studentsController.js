@@ -1,4 +1,7 @@
 const Student = require('../models/studentModel')
+const Group = require('../models/groupModel')
+const Cours = require('../models/CoursModel')
+const groupController = require('./groupesContrller')
 const bcrypt = require('bcrypt');
 
 
@@ -57,7 +60,16 @@ const getByLevel = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 }
+const getGroup = async (req,res)=>{
+    try{
+        const groups = await Group.find({students : req.params.id})
+        if(!groups) return res.status(400).json({message : "marah m3a htta group"})
+        res.status(200).json(groups)
+    }catch(err){
+        res.status(500).json({message : err.message})
+    }
+}
 
 module.exports = {
-    index,show,store,update,destroy,getByLevel
+    index,show,store,update,destroy,getByLevel,getGroup
 }

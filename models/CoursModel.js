@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Teacher = require('./teacherModel')
 const Group = require('./groupModel')
 
 const coursSchema = mongoose.Schema({
@@ -12,16 +11,10 @@ const coursSchema = mongoose.Schema({
         require : true,
         enum : ['1p','2p','3p','4p','5p','1m','2m','3m','4m','1l','2l','3l',]
     },
-    teacher : {
-        type : mongoose.Schema.Types.ObjectId , 
-        ref : Teacher , 
-        require : true 
-    } ,
     groups : [{
         type : mongoose.Schema.Types.ObjectId,
         ref : Group
-    }]
-
+    }],
 }) 
 const Cours = mongoose.model("Cours",coursSchema)
 module.exports=Cours

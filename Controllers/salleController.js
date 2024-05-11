@@ -1,4 +1,5 @@
 const Salle = require('../models/salleModel')
+const Group = require('../models/groupModel')
 
 const index = async (req,res)=>{
     try{
@@ -40,7 +41,14 @@ const destroy = async (req,res)=>{
         res.status(500).json({message : err.message})
     }
 }
+const getGroups = async (req,res)=>{
+    try{
+        const groups = await Group.find({salle : req.params.id})
+        if(!groups) return res.status(400).json({message : "any group study in this salle "})
+        res.status(200).json(groups)
+    }catch(err){res.status(500).json({message : err.message})}
+}
 
 module.exports = {
-    index,show,store,update,destroy
+    index,show,store,update,destroy,getGroups
 }

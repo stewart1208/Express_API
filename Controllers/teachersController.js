@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const index = async(req,res)=>{
     try{
-        const teachers = await Teacher.find()
+        const teachers = await Teacher.find().populate('courses')
         res.status(200).json(teachers)
     }catch(err){
         res.status(500).json({message : err.message})
@@ -11,7 +11,7 @@ const index = async(req,res)=>{
 }
 const show = async (req,res)=>{
     try{
-        const teacher = await Teacher.findById(req.params.id)
+        const teacher = await Teacher.findById(req.params.id).populate('courses')
         if(!teacher) {
             return res.status(404).json({message : 'teacher not fund !'})
         }
@@ -20,7 +20,6 @@ const show = async (req,res)=>{
         res.status(500).json({message : err.message})
     }
 }
-
 const store = async (req, res) => {
     try {
         const { password } = req.body;
