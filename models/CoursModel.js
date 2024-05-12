@@ -11,6 +11,10 @@ const coursSchema = mongoose.Schema({
         require : true,
         enum : ['1p','2p','3p','4p','5p','1m','2m','3m','4m','1l','2l','3l',]
     },
+    prix : {
+        type : Number,
+        require : true ,
+    } ,
     groups : [{
         type : mongoose.Schema.Types.ObjectId,
         ref : Group

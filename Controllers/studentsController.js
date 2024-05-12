@@ -1,7 +1,6 @@
 const Student = require('../models/studentModel')
 const Group = require('../models/groupModel')
-const Cours = require('../models/CoursModel')
-const groupController = require('./groupesContrller')
+const Presence = require('../models/presenceModel')
 const bcrypt = require('bcrypt');
 
 
@@ -69,7 +68,14 @@ const getGroup = async (req,res)=>{
         res.status(500).json({message : err.message})
     }
 }
+const getPresences = async (req,res)=>{
+    try{
+        const presences = await Presence.find({students : req.params.id})
+        if(!presences) return res.status(400).json({message : "this student haven't a presence !"})
+        res.status(200).json(presences)
+    }catch(err){res.status(500).json({message : err.message})}
+}
 
 module.exports = {
-    index,show,store,update,destroy,getByLevel,getGroup
+    index,show,store,update,destroy,getByLevel,getGroup,getPresences
 }

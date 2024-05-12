@@ -11,7 +11,8 @@ const presenceSchema = mongoose.Schema({
     students : [{
         type : mongoose.Schema.Types.ObjectId ,
         ref : Student ,
-        require : true
+        require : true , 
+        
     }] ,
     group : {
         type : mongoose.Schema.Types.ObjectId ,
