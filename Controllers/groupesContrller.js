@@ -1,6 +1,5 @@
 const Group = require('../models/groupModel')
 const Cours = require ('../models/CoursModel')
-const Presence = require('../models/presenceModel')
 
 const index = async (req,res)=>{
     try{
@@ -51,13 +50,7 @@ const getCours = async (req,res)=>{
         res.status(500).json({message : err.message})
     }
 }
-const getPresences = async (req,res)=>{
-    try{
-        const presences = await Presence.find({group : req.params.id})
-        if(!presences) return res.status(400).json({message : "this group haven't a presence !"})
-        res.status(200).json(presences)
-    }catch(err){res.status(500).json({message : err.message})}
-}
+//get attnedances 
 module.exports={
-    index,show,store,update,destroy,getCours,getPresences
+    index,show,store,update,destroy,getCours
 }

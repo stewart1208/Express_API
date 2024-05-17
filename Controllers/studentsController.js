@@ -1,7 +1,7 @@
 const Student = require('../models/studentModel')
 const Group = require('../models/groupModel')
-const Presence = require('../models/presenceModel')
 const bcrypt = require('bcrypt');
+const Attendance = require('../models/attendance');
 
 
 const index = async (req,res)=>{
@@ -68,14 +68,14 @@ const getGroup = async (req,res)=>{
         res.status(500).json({message : err.message})
     }
 }
-const getPresences = async (req,res)=>{
-    try{
-        const presences = await Presence.find({students : req.params.id})
-        if(!presences) return res.status(400).json({message : "this student haven't a presence !"})
-        res.status(200).json(presences)
+const getAttendances = async (req,res)=>{
+    try {
+        const attendances = await Attendance.find({student : req.params.id})
+        if(!attendances) return res.status(400).json({message : "this student haven't a presence !"})
+        res.status(200).json(attendances)
     }catch(err){res.status(500).json({message : err.message})}
 }
-
+// const getAmounts 
 module.exports = {
-    index,show,store,update,destroy,getByLevel,getGroup,getPresences
+    index,show,store,update,destroy,getByLevel,getGroup,getAttendances
 }
